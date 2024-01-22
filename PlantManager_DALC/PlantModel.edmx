@@ -1,0 +1,243 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="El_SaltoModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'El_Salto.dbo.vwGetLogins' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="vwGetLogins">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="Username" />
+            <PropertyRef Name="Password" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Username" Type="varchar" MaxLength="25" Nullable="false" />
+          <Property Name="Password" Type="varchar" MaxLength="255" Nullable="false" />
+        </EntityType>
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'El_Salto.dbo.vwGetPlantas' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="vwGetPlantas">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="NombreComun" />
+            <PropertyRef Name="NombreCientifico" />
+            <PropertyRef Name="TipoPlanta" />
+            <PropertyRef Name="TiempoRiego" />
+            <PropertyRef Name="CantidadAgua" />
+            <PropertyRef Name="Epoca" />
+            <PropertyRef Name="Descripcion" />
+            <PropertyRef Name="EsVenenosa" />
+            <PropertyRef Name="EsAutoctona" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NombreComun" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="NombreCientifico" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="TipoPlanta" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="Descripcion" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="TiempoRiego" Type="int" Nullable="false" />
+          <Property Name="CantidadAgua" Type="int" Nullable="false" />
+          <Property Name="Epoca" Type="varchar" MaxLength="15" Nullable="false" />
+          <Property Name="EsVenenosa" Type="bit" Nullable="false" />
+          <Property Name="EsAutoctona" Type="bit" Nullable="false" />
+        </EntityType>
+        <Function Name="spCreateUser" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="username" Type="varchar" Mode="In" />
+          <Parameter Name="password" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="spLogin" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="username" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="spObtenerCantidadPlantasPorTipo" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="TipoPlanta" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="spPlantaDeleteById" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="PlantaId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="spPlantaSave" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="NombreComun" Type="varchar" Mode="In" />
+          <Parameter Name="NombreCientifico" Type="varchar" Mode="In" />
+          <Parameter Name="TipoPlanta" Type="varchar" Mode="In" />
+          <Parameter Name="Descripcion" Type="varchar" Mode="In" />
+          <Parameter Name="TiempoRiego" Type="int" Mode="In" />
+          <Parameter Name="CantidadAgua" Type="int" Mode="In" />
+          <Parameter Name="Epoca" Type="varchar" Mode="In" />
+          <Parameter Name="EsVenenosa" Type="bit" Mode="In" />
+          <Parameter Name="EsAutoctona" Type="bit" Mode="In" />
+        </Function>
+        <Function Name="spPlantaUpdateById" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="PlantaId" Type="int" Mode="In" />
+          <Parameter Name="NombreComun" Type="varchar" Mode="In" />
+          <Parameter Name="NombreCientifico" Type="varchar" Mode="In" />
+          <Parameter Name="TipoPlanta" Type="varchar" Mode="In" />
+          <Parameter Name="Descripcion" Type="varchar" Mode="In" />
+          <Parameter Name="TiempoRiego" Type="int" Mode="In" />
+          <Parameter Name="CantidadAgua" Type="int" Mode="In" />
+          <Parameter Name="Epoca" Type="varchar" Mode="In" />
+          <Parameter Name="EsVenenosa" Type="bit" Mode="In" />
+          <Parameter Name="EsAutoctona" Type="bit" Mode="In" />
+        </Function>
+        <EntityContainer Name="El_SaltoModelStoreContainer">
+          <EntitySet Name="vwGetLogins" EntityType="Self.vwGetLogins" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [vwGetLogins].[Id] AS [Id], 
+    [vwGetLogins].[Username] AS [Username], 
+    [vwGetLogins].[Password] AS [Password]
+    FROM [dbo].[vwGetLogins] AS [vwGetLogins]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="vwGetPlantas" EntityType="Self.vwGetPlantas" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [vwGetPlantas].[Id] AS [Id], 
+    [vwGetPlantas].[NombreComun] AS [NombreComun], 
+    [vwGetPlantas].[NombreCientifico] AS [NombreCientifico], 
+    [vwGetPlantas].[TipoPlanta] AS [TipoPlanta], 
+    [vwGetPlantas].[Descripcion] AS [Descripcion], 
+    [vwGetPlantas].[TiempoRiego] AS [TiempoRiego], 
+    [vwGetPlantas].[CantidadAgua] AS [CantidadAgua], 
+    [vwGetPlantas].[Epoca] AS [Epoca], 
+    [vwGetPlantas].[EsVenenosa] AS [EsVenenosa], 
+    [vwGetPlantas].[EsAutoctona] AS [EsAutoctona]
+    FROM [dbo].[vwGetPlantas] AS [vwGetPlantas]</DefiningQuery>
+          </EntitySet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="El_SaltoModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="vwGetPlantas">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="CantidadAgua" />
+            <PropertyRef Name="Descripcion" />
+            <PropertyRef Name="Epoca" />
+            <PropertyRef Name="EsAutoctona" />
+            <PropertyRef Name="EsVenenosa" />
+            <PropertyRef Name="NombreCientifico" />
+            <PropertyRef Name="NombreComun" />
+            <PropertyRef Name="TiempoRiego" />
+            <PropertyRef Name="TipoPlanta" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NombreComun" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="NombreCientifico" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="TipoPlanta" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Descripcion" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" DefaultValue="Sin Información" />
+          <Property Name="TiempoRiego" Type="Int32" Nullable="false" />
+          <Property Name="CantidadAgua" Type="Int32" Nullable="false" />
+          <Property Name="Epoca" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="EsVenenosa" Type="Boolean" Nullable="false" />
+          <Property Name="EsAutoctona" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityContainer Name="El_SaltoEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="vwGetPlantas" EntityType="Self.vwGetPlantas" />
+          <FunctionImport Name="spPlantaDeleteById">
+          <Parameter Name="PlantaId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="spPlantaSave">
+            <Parameter Name="NombreComun" Mode="In" Type="String" />
+            <Parameter Name="NombreCientifico" Mode="In" Type="String" />
+            <Parameter Name="TipoPlanta" Mode="In" Type="String" />
+            <Parameter Name="Descripcion" Mode="In" Type="String" />
+            <Parameter Name="TiempoRiego" Mode="In" Type="Int32" />
+            <Parameter Name="CantidadAgua" Mode="In" Type="Int32" />
+            <Parameter Name="Epoca" Mode="In" Type="String" />
+            <Parameter Name="EsVenenosa" Mode="In" Type="Boolean" />
+            <Parameter Name="EsAutoctona" Mode="In" Type="Boolean" />
+          </FunctionImport>
+          <FunctionImport Name="spPlantaUpdateById">
+            <Parameter Name="PlantaId" Mode="In" Type="Int32" />
+            <Parameter Name="NombreComun" Mode="In" Type="String" />
+            <Parameter Name="NombreCientifico" Mode="In" Type="String" />
+            <Parameter Name="TipoPlanta" Mode="In" Type="String" />
+            <Parameter Name="Descripcion" Mode="In" Type="String" />
+            <Parameter Name="TiempoRiego" Mode="In" Type="Int32" />
+            <Parameter Name="CantidadAgua" Mode="In" Type="Int32" />
+            <Parameter Name="Epoca" Mode="In" Type="String" />
+            <Parameter Name="EsVenenosa" Mode="In" Type="Boolean" />
+            <Parameter Name="EsAutoctona" Mode="In" Type="Boolean" />
+          </FunctionImport>
+          <FunctionImport Name="spObtenerCantidadPlantasPorTipo" ReturnType="Collection(Int32)">
+          <Parameter Name="TipoPlanta" Mode="In" Type="String" />
+          </FunctionImport>
+          <EntitySet Name="vwGetLogins" EntityType="El_SaltoModel.vwGetLogins" />
+          <FunctionImport Name="spCreateUser">
+            <Parameter Name="username" Mode="In" Type="String" />
+            <Parameter Name="password" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="spLogin" ReturnType="Collection(String)">
+          <Parameter Name="username" Mode="In" Type="String" />
+          </FunctionImport>
+        </EntityContainer>
+        <EntityType Name="vwGetLogins">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="Username" />
+            <PropertyRef Name="Password" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Username" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="Password" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="El_SaltoModelStoreContainer" CdmEntityContainer="El_SaltoEntities">
+          <EntitySetMapping Name="vwGetPlantas">
+            <EntityTypeMapping TypeName="El_SaltoModel.vwGetPlantas">
+              <MappingFragment StoreEntitySet="vwGetPlantas">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="NombreComun" ColumnName="NombreComun" />
+                <ScalarProperty Name="NombreCientifico" ColumnName="NombreCientifico" />
+                <ScalarProperty Name="TipoPlanta" ColumnName="TipoPlanta" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="TiempoRiego" ColumnName="TiempoRiego" />
+                <ScalarProperty Name="CantidadAgua" ColumnName="CantidadAgua" />
+                <ScalarProperty Name="Epoca" ColumnName="Epoca" />
+                <ScalarProperty Name="EsVenenosa" ColumnName="EsVenenosa" />
+                <ScalarProperty Name="EsAutoctona" ColumnName="EsAutoctona" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="spPlantaDeleteById" FunctionName="El_SaltoModel.Store.spPlantaDeleteById" />
+          <FunctionImportMapping FunctionImportName="spPlantaSave" FunctionName="El_SaltoModel.Store.spPlantaSave" />
+          <FunctionImportMapping FunctionImportName="spPlantaUpdateById" FunctionName="El_SaltoModel.Store.spPlantaUpdateById" />
+          <FunctionImportMapping FunctionImportName="spObtenerCantidadPlantasPorTipo" FunctionName="El_SaltoModel.Store.spObtenerCantidadPlantasPorTipo" />
+          <EntitySetMapping Name="vwGetLogins">
+            <EntityTypeMapping TypeName="El_SaltoModel.vwGetLogins">
+              <MappingFragment StoreEntitySet="vwGetLogins">
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="spCreateUser" FunctionName="El_SaltoModel.Store.spCreateUser" />
+          <FunctionImportMapping FunctionImportName="spLogin" FunctionName="El_SaltoModel.Store.spLogin" />
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

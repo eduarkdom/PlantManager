@@ -1,0 +1,142 @@
+﻿<Window x:Class="PlantManager_GUI.Vistas.AgregarPlanta"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PlantManager_GUI.Vistas"
+        mc:Ignorable="d"
+        Title="Agregar Planta" Height="650" Width="800">
+    <Grid x:Name="gAgregarPlanta">
+        <Label x:Name="lblTitulo" Content="Agregar una Planta" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="24" Margin="0,-5,0,0"/>
+        <StackPanel Margin="209,42,105,16" MaxWidth="500" x:Name="spAgregarPlanta">
+            <Label Content="Nombre Común:" x:Name="lblNombreComun"/>
+            <TextBox x:Name="txtNombreComun" Margin="0,0,0,5" Padding="5" MinHeight="30"
+             Text="{Binding NombreComun, ValidatesOnExceptions=True, UpdateSourceTrigger=PropertyChanged}"
+             MaxLength="100"
+             Validation.ErrorTemplate="{StaticResource TextBoxErrorTemplate}"
+             Style="{StaticResource TextBoxErrorTemplateToolTip}"
+             />
+            <Label Content="Nombre Científico:" x:Name="lblNombreCientifico"/>
+            <TextBox x:Name="txtNombreCientifico" Margin="0,0,0,5" Padding="5" MinHeight="30"
+             Text="{Binding NombreCientifico, ValidatesOnExceptions=True, UpdateSourceTrigger=PropertyChanged}"
+             MaxLength="150"
+             Validation.ErrorTemplate="{StaticResource TextBoxErrorTemplate}"
+             Style="{StaticResource TextBoxErrorTemplateToolTip}"
+             />
+            <Label Content="Tipo de Planta:" x:Name="lblTipoPlanta"/>
+            <ComboBox x:Name="cmbTipoPlanta" Margin="0,0,0,5" Height="30" VerticalContentAlignment="Center"
+          SelectedIndex="0"
+          SelectedValuePath="Content" 
+          SelectedValue="{Binding TipoPlanta, UpdateSourceTrigger=PropertyChanged, Mode=OneWayToSource, ValidatesOnExceptions=True}">
+                <ComboBoxItem Content="Seleccionar" IsEnabled="False" x:Name="cbiTipoPlanta1"/>
+                <ComboBoxItem Content="Herbácea" x:Name="cbiTipoPlanta2"/>
+                <ComboBoxItem Content="Matorral" x:Name="cbiTipoPlanta3"/>
+                <ComboBoxItem Content="Arbusto" x:Name="cbiTipoPlanta4"/>
+                <ComboBoxItem Content="Árbol" x:Name="cbiTipoPlanta5"/>
+            </ComboBox>
+
+            <Label Content="Descripción:" x:Name="lblDescripcion"/>
+            <TextBox x:Name="txtDescripcion" Margin="0,0,0,5" Padding="5" MinHeight="30"
+             Text="{Binding Descripcion, ValidatesOnExceptions=True, UpdateSourceTrigger=PropertyChanged}"
+             Validation.ErrorTemplate="{StaticResource TextBoxErrorTemplate}"
+             Style="{StaticResource TextBoxErrorTemplateToolTip}"
+             />
+            <Label Content="Tiempo de Riego:" x:Name="lblTiempoRiego"/>
+            <TextBox x:Name="txtTiempoRiego" Margin="0,0,0,5" Padding="5" MinHeight="30"
+             Text="{Binding TiempoRiego, ValidatesOnExceptions=True, UpdateSourceTrigger=PropertyChanged}"
+             Validation.ErrorTemplate="{StaticResource TextBoxErrorTemplate}"
+             Style="{StaticResource TextBoxErrorTemplateToolTip}"
+             PreviewTextInput="TextBox_PreviewTextInput"
+            CommandManager.PreviewExecuted="TextBox_PreviewExecuted"
+             />
+            <Label Content="Cantidad de Agua:" x:Name="lblCantidadAgua"/>
+            <TextBox x:Name="txtCantidadAgua" Margin="0,0,0,5" Padding="5" MinHeight="30"
+             Text="{Binding CantidadAgua, ValidatesOnExceptions=True, UpdateSourceTrigger=PropertyChanged}"
+             Validation.ErrorTemplate="{StaticResource TextBoxErrorTemplate}"
+             Style="{StaticResource TextBoxErrorTemplateToolTip}"
+             PreviewTextInput="TextBox_PreviewTextInput"
+             CommandManager.PreviewExecuted="TextBox_PreviewExecuted"
+             />
+            <Label Content="Época:" x:Name="lblEpoca"/>
+            <ComboBox x:Name="cmbEpoca" Margin="0,0,0,5" Height="30" VerticalContentAlignment="Center"
+          SelectedIndex="0"
+          SelectedValuePath="Content" 
+          SelectedValue="{Binding Epoca, UpdateSourceTrigger=PropertyChanged, Mode=OneWayToSource, ValidatesOnExceptions=True}">
+                <ComboBoxItem Content="Seleccionar" IsEnabled="False" x:Name="cbiEpoca1"/>
+                <ComboBoxItem Content="Verano" x:Name="cbiEpoca2"/>
+                <ComboBoxItem Content="Invierno" x:Name="cbiEpoca3"/>
+                <ComboBoxItem Content="Otoño" x:Name="cbiEpoca4"/>
+                <ComboBoxItem Content="Primavera" x:Name="cbiEpoca5"/>
+            </ComboBox>
+
+            <StackPanel Orientation="Horizontal" x:Name="spAgregarPlantaCheckBox">
+                <Label x:Name="lblEsVenenosa" Content="¿Es Venenosa?" Width="92" Margin="0,0,0,5"/>
+                <CheckBox x:Name="chkEsVenenosa" Content="" RenderTransformOrigin="3.88,0.606" Padding="4,-1,-2,0" VerticalContentAlignment="Center" Height="25" Width="73" VerticalAlignment="Center" HorizontalAlignment="Left" HorizontalContentAlignment="Center" Margin="10,0,0,0" 
+                  IsChecked="{Binding EsVenenosa, UpdateSourceTrigger=PropertyChanged}"
+                  />
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" x:Name="spAgregarPlantaCheckBox2">
+                <Label x:Name="lblEsAutoctona" Content="¿Es Autóctona?" Width="92" Margin="0,0,0,5"/>
+                <CheckBox x:Name="chkEsAutoctona" Content="" RenderTransformOrigin="3.88,0.606" Padding="4,-1,-2,0" VerticalContentAlignment="Center" Height="25" Width="73" VerticalAlignment="Center" HorizontalAlignment="Left" HorizontalContentAlignment="Center" Margin="10,0,0,0" 
+                  IsChecked="{Binding EsAutoctona, UpdateSourceTrigger=PropertyChanged}"
+                  />
+            </StackPanel>
+            <Button x:Name="btnAgregarPlanta"
+        Content="Agregar Planta"
+        HorizontalAlignment="Center"
+        VerticalAlignment="Top"
+        RenderTransformOrigin="0.511,0.932"
+        FontSize="18"
+        Foreground="White"
+        Margin="0,15,0,0"
+        Background="#84B749"
+        Padding="2,2,2,2"
+        Height="39"
+        VerticalContentAlignment="Center"
+        Click="AgregarPlanta_Click">
+                <Button.Style>
+                    <Style TargetType="Button">
+                        
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding Path=(Validation.HasError), ElementName=txtNombreComun}" Value="True">
+                                <Setter Property="IsEnabled" Value="False"/>
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding ElementName=txtNombreComun, Path=Text.Length}" Value="0">
+                                <Setter Property="IsEnabled" Value="False"/>
+                            </DataTrigger>
+
+                            <DataTrigger Binding="{Binding Path=(Validation.HasError), ElementName=txtNombreCientifico}" Value="True">
+                                <Setter Property="IsEnabled" Value="False"/>
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding ElementName=txtNombreCientifico, Path=Text.Length}" Value="0">
+                                <Setter Property="IsEnabled" Value="False"/>
+                            </DataTrigger>
+
+                            <DataTrigger Binding="{Binding Path=(Validation.HasError), ElementName=txtCantidadAgua}" Value="True">
+                                <Setter Property="IsEnabled" Value="False"/>
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding ElementName=txtCantidadAgua, Path=Text.Length}" Value="0">
+                                <Setter Property="IsEnabled" Value="False"/>
+                            </DataTrigger>
+                            
+                            <DataTrigger Binding="{Binding Path=(Validation.HasError), ElementName=txtTiempoRiego}" Value="True">
+                                <Setter Property="IsEnabled" Value="False"/>
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding lentght, ElementName=txtTiempoRiego}" Value="True">
+                                <Setter Property="IsEnabled" Value="False"/>
+                            </DataTrigger>
+                            
+                            <DataTrigger Binding="{Binding SelectedIndex, ElementName=cmbTipoPlanta}" Value="0">
+                                <Setter Property="IsEnabled" Value="False"/>
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding SelectedIndex, ElementName=cmbEpoca}" Value="0">
+                                <Setter Property="IsEnabled" Value="False"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
+            </Button>
+        </StackPanel>
+
+    </Grid>
+</Window>
